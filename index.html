@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>مجمع السلمانية الطبي</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --blue-deep:#0b2c6a;--blue-mid:#1557b0;--blue-light:#2980d9;
+  --blue-pale:#d6e8f7;--blue-frost:#f2f7fd;--white:#fff;
+  --text-dark:#0a1e45;--text-mid:#254475;--text-soft:#5a74a0;
+  --shadow:0 4px 28px rgba(11,44,106,.10);
+  --r:12px;--r-lg:20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--blue-frost);color:var(--text-dark);direction:rtl;}
+
+/* ─── NAV ─── */
+nav{
+  position:sticky;top:0;z-index:999;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--blue-pale);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 36px;height:70px;
+  box-shadow:0 1px 14px rgba(11,44,106,.07);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo img{height:58px;width:auto;object-fit:contain;display:block;}
+.nav-logo-txt .ar{font-size:.95rem;font-weight:700;color:var(--blue-deep);line-height:1.3;}
+.nav-logo-txt .en{font-size:.62rem;color:var(--text-soft);letter-spacing:.5px;}
+
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none;}
+.nav-links a{
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;font-size:.82rem;font-weight:600;
+  color:var(--text-mid);padding:7px 11px;border-radius:8px;
+  transition:background .17s,color .17s;white-space:nowrap;
+}
+.nav-links a:hover{background:var(--blue-pale);color:var(--blue-mid);}
+.nav-links a svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+
+.btn-login{
+  display:flex;align-items:center;gap:6px;
+  background:var(--blue-mid);color:#fff;border:none;
+  border-radius:9px;padding:8px 18px;
+  font-size:.82rem;font-weight:600;
+  font-family:'IBM Plex Sans Arabic',sans-serif;
+  cursor:pointer;transition:background .18s;white-space:nowrap;margin-right:6px;
+}
+.btn-login:hover{background:var(--blue-deep);}
+.btn-login svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* hamburger */
+.nav-toggle{display:none;background:none;border:1px solid var(--blue-pale);border-radius:8px;padding:6px 8px;cursor:pointer;}
+.nav-toggle span{display:block;width:20px;height:2px;background:var(--blue-mid);margin:4px 0;border-radius:2px;transition:all .2s;}
+
+/* ─── HERO ─── */
+.hero{
+  display:grid;grid-template-columns:55% 45%;
+  min-height:82vh;overflow:hidden;
+  background:linear-gradient(135deg,#e9f3fb,var(--blue-frost));
+}
+.hero-left{
+  padding:60px 48px 60px 32px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--blue-pale);color:var(--blue-mid);
+  border:1px solid rgba(21,87,176,.2);border-radius:40px;
+  padding:5px 14px;font-size:.76rem;font-weight:600;margin-bottom:18px;width:fit-content;
+}
+.hero-badge svg{width:14px;height:14px;stroke:var(--blue-mid);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.hero-title{font-size:clamp(1.75rem,3vw,2.6rem);font-weight:700;color:var(--blue-deep);line-height:1.25;margin-bottom:5px;}
+.hero-title span{color:var(--blue-light);}
+.hero-en{font-size:.8rem;color:var(--text-soft);letter-spacing:.8px;margin-bottom:20px;}
+.hero-desc{font-size:.95rem;color:var(--text-mid);line-height:2;max-width:440px;margin-bottom:32px;}
+.hero-desc strong{color:var(--blue-mid);font-weight:700;}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;}
+
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:600;font-size:.9rem;
+  border-radius:10px;padding:12px 24px;cursor:pointer;border:none;transition:all .2s;
+}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.btn-primary{background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));color:#fff;box-shadow:0 3px 14px rgba(21,87,176,.3);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(21,87,176,.4);}
+.btn-primary svg{stroke:#fff;}
+.btn-ghost{background:transparent;color:var(--blue-mid);border:1.5px solid var(--blue-mid);}
+.btn-ghost:hover{background:var(--blue-pale);}
+
+.hero-right {
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex; /* Added to help alignment */
+  align-items: center;
+}
+
+.hero-right img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Keeps aspect ratio while filling space */
+  object-position: right center; /* Focuses on the right side where the building usually is */
+  display: block;
+}
+.hero-right::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,var(--blue-frost) 0%,rgba(242,247,253,.3) 20%,transparent 50%);
+}
+
+/* ─── SECTIONS ─── */
+section{padding:64px 36px;}
+.sec-label{
+  display:inline-block;background:var(--blue-pale);color:var(--blue-mid);
+  border:1px solid rgba(21,87,176,.18);border-radius:40px;
+  padding:4px 14px;font-size:.73rem;font-weight:600;margin-bottom:9px;
+}
+.sec-title{font-size:clamp(1.25rem,2.2vw,1.75rem);font-weight:700;color:var(--blue-deep);margin-bottom:6px;}
+.sec-sub{font-size:.88rem;color:var(--text-soft);}
+.sec-header{text-align:center;margin-bottom:40px;}
+
+/* ─── 5 FEATURE CARDS ─── */
+#features{background:var(--white);}
+.features-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;max-width:1140px;margin:0 auto;}
+.feat-btn{
+  background:var(--blue-frost);border:1px solid var(--blue-pale);
+  border-radius:var(--r);padding:28px 14px 24px;text-align:center;
+  cursor:pointer;transition:all .22s;position:relative;overflow:hidden;
+}
+.feat-btn::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue-mid),var(--blue-light));opacity:0;transition:opacity .2s;}
+.feat-btn:hover{transform:translateY(-5px);box-shadow:var(--shadow);background:var(--white);}
+.feat-btn:hover::after{opacity:1;}
+.feat-icon-wrap{
+  width:58px;height:58px;border-radius:14px;margin:0 auto 14px;
+  background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 12px rgba(21,87,176,.22);transition:transform .2s;
+}
+.feat-icon-wrap svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.feat-btn:hover .feat-icon-wrap{transform:scale(1.06);}
+.feat-name{font-size:.9rem;font-weight:700;color:var(--blue-deep);margin-bottom:5px;}
+.feat-desc{font-size:.74rem;color:var(--text-soft);line-height:1.6;}
+
+/* ─── BOOKING ─── */
+#booking{background:linear-gradient(140deg,#e0eef9,var(--blue-frost));}
+.booking-card{max-width:880px;margin:0 auto;background:var(--white);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden;}
+.booking-head{background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));color:#fff;padding:24px 32px;display:flex;align-items:center;gap:12px;}
+.booking-head svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.booking-head h2{font-size:1.1rem;font-weight:700;}
+.booking-head p{font-size:.8rem;opacity:.7;margin-top:2px;}
+.booking-body{padding:32px 36px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.fgrp{display:flex;flex-direction:column;gap:6px;}
+.fgrp label{font-size:.8rem;font-weight:600;color:var(--text-mid);}
+.fgrp input,.fgrp select{
+  border:1px solid var(--blue-pale);border-radius:9px;
+  padding:11px 13px;font-size:.88rem;
+  font-family:'IBM Plex Sans Arabic',sans-serif;
+  color:var(--text-dark);background:var(--blue-frost);
+  outline:none;transition:border-color .17s;direction:rtl;
+  -webkit-appearance:none;appearance:none;
+}
+.fgrp input:focus,.fgrp select:focus{border-color:var(--blue-light);background:var(--white);}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.cal-nav-btn{background:var(--blue-frost);border:1px solid var(--blue-pale);border-radius:7px;padding:5px 12px;cursor:pointer;font-size:.84rem;color:var(--blue-mid);font-weight:600;font-family:'IBM Plex Sans Arabic',sans-serif;}
+.cal-month{font-size:.9rem;font-weight:700;color:var(--blue-deep);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-dh{font-size:.68rem;font-weight:600;color:var(--text-soft);text-align:center;padding:3px 0;}
+.cal-d{aspect-ratio:1;border-radius:7px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text-mid);}
+.cal-d:hover:not(.empty):not(.past){background:var(--blue-pale);color:var(--blue-mid);}
+.cal-d.selected{background:var(--blue-mid);color:#fff;}
+.cal-d.today{border-color:#0099cc;color:#0099cc;}
+.cal-d.empty,.cal-d.past{opacity:.25;pointer-events:none;}
+.slots-wrap{display:flex;flex-wrap:wrap;gap:7px;margin-top:5px;}
+.slot{padding:7px 14px;border-radius:8px;border:1px solid var(--blue-pale);font-size:.79rem;font-weight:600;cursor:pointer;color:var(--text-mid);background:var(--blue-frost);transition:all .15s;font-family:'IBM Plex Sans Arabic',sans-serif;}
+.slot:hover{border-color:var(--blue-light);color:var(--blue-mid);}
+.slot.selected{background:var(--blue-mid);color:#fff;border-color:var(--blue-mid);}
+.slot.off{opacity:.25;pointer-events:none;text-decoration:line-through;}
+.confirm-msg{display:none;margin-top:16px;background:#ebfaf2;border:1px solid #6ee7b7;border-radius:9px;padding:14px 18px;text-align:center;font-size:.9rem;font-weight:600;color:#065f46;}
+.confirm-msg.show{display:block;}
+
+/* ─── RESULTS ─── */
+#results{background:var(--white);}
+.results-center{max-width:700px;margin:0 auto;}
+.results-box{background:var(--blue-frost);border:1px solid var(--blue-pale);border-radius:var(--r-lg);padding:44px 40px;text-align:center;}
+.results-icon-wrap{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 3px 12px rgba(21,87,176,.22);}
+.results-icon-wrap svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.results-box h3{font-size:1.15rem;font-weight:700;color:var(--blue-deep);margin-bottom:8px;}
+.results-box p{color:var(--text-soft);line-height:1.85;margin-bottom:24px;font-size:.9rem;}
+.results-form{display:grid;gap:11px;max-width:360px;margin:0 auto 18px;}
+.results-form input{border:1px solid var(--blue-pale);border-radius:9px;padding:12px 15px;font-size:.88rem;font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--white);outline:none;direction:rtl;transition:border-color .17s;-webkit-appearance:none;}
+.results-form input:focus{border-color:var(--blue-light);}
+.result-card{display:none;background:var(--white);border-radius:var(--r);border:1px solid var(--blue-pale);padding:26px 30px;margin-top:18px;box-shadow:var(--shadow);}
+.result-card.show{display:block;}
+.rc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:13px;border-bottom:1px solid var(--blue-pale);}
+.rc-title{font-size:.97rem;font-weight:700;color:var(--blue-deep);}
+.rc-date{font-size:.78rem;color:var(--text-soft);}
+.rc-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--blue-pale);}
+.rc-row:last-child{border-bottom:none;}
+.rc-lbl{font-size:.84rem;color:var(--text-mid);font-weight:500;}
+.rc-val{font-size:.84rem;font-weight:700;}
+.rc-val.ok{color:#16a34a;}
+.rc-val.hi{color:#dc2626;}
+
+/* ─── DEPARTMENTS ─── */
+#departments{background:linear-gradient(140deg,var(--blue-frost),#deedf8);}
+.dept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;max-width:1080px;margin:0 auto;}
+.dept-card{background:var(--white);border-radius:var(--r);border:1px solid var(--blue-pale);padding:22px 16px;text-align:center;cursor:pointer;transition:all .2s;}
+.dept-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--blue-light);}
+.dept-card-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));display:flex;align-items:center;justify-content:center;margin:0 auto 11px;box-shadow:0 2px 8px rgba(21,87,176,.2);}
+.dept-card-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.dname{font-size:.86rem;font-weight:700;color:var(--blue-deep);margin-bottom:4px;}
+.dinfo{font-size:.72rem;color:var(--text-soft);direction:ltr;}
+
+/* ─── ABOUT ─── */
+#about{background:var(--white);}
+.about-wrap{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+.about-text h2{font-size:1.5rem;font-weight:700;color:var(--blue-deep);margin-bottom:14px;}
+.about-text p{font-size:.92rem;color:var(--text-mid);line-height:2.05;margin-bottom:12px;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.stat-box{background:var(--blue-frost);border-radius:var(--r);border:1px solid var(--blue-pale);padding:18px;text-align:center;}
+.stat-num{font-size:1.65rem;font-weight:700;color:var(--blue-mid);}
+.stat-lbl{font-size:.76rem;color:var(--text-soft);font-weight:500;margin-top:2px;}
+.about-img {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 14px 44px rgba(11,44,106,.13);
+  /* Change aspect-ratio or remove it to let the image breathe */
+  height: auto; 
+  display: flex;
+}.about-img img {
+  width: 100%;
+  height: auto; /* Changed from 100% to auto */
+  max-height: 500px;
+  object-fit: cover; /* Change to 'contain' if you don't want any cropping at all */
+}
+
+/* ─── CONTACT ─── */
+#contact{background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));}
+#contact .sec-title{color:#fff;}
+#contact .sec-sub{color:rgba(255,255,255,.6);}
+#contact .sec-label{background:rgba(255,255,255,.13);color:#fff;border-color:rgba(255,255,255,.17);}
+.con-main-number{max-width:1080px;margin:0 auto 24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:var(--r);padding:18px 24px;text-align:center;color:#fff;}
+.con-main-number p{font-size:.88rem;opacity:.75;margin-bottom:4px;}
+.con-main-number span{font-size:1.4rem;font-weight:700;letter-spacing:.5px;direction:ltr;display:inline-block;}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px;max-width:1080px;margin:0 auto;}
+.con-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:var(--r);padding:20px 16px;text-align:center;backdrop-filter:blur(6px);transition:all .2s;}
+.con-card:hover{background:rgba(255,255,255,.15);transform:translateY(-3px);}
+.con-card-icon{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+.con-card-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.con-lbl{font-size:.76rem;color:rgba(255,255,255,.65);margin-bottom:4px;font-weight:600;}
+.con-val{font-size:.86rem;font-weight:700;color:#fff;direction:ltr;line-height:1.55;}
+.con-val a{color:#fff;text-decoration:none;}
+
+/* ─── CHATBOT ─── */
+.chat-fab{position:fixed;bottom:28px;left:28px;z-index:900;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));border:none;cursor:pointer;box-shadow:0 4px 20px rgba(21,87,176,.45);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.chat-fab:hover{transform:scale(1.07);}
+.chat-fab svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.chat-badge{position:absolute;top:1px;right:1px;width:16px;height:16px;background:#ef4444;border-radius:50%;border:2px solid #fff;font-size:.58rem;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;}
+.chat-win{position:fixed;bottom:96px;left:28px;z-index:900;width:330px;border-radius:var(--r-lg);background:var(--white);box-shadow:0 14px 48px rgba(11,44,106,.2);display:none;flex-direction:column;overflow:hidden;}
+.chat-win.open{display:flex;animation:slideUp .26s ease;}
+.chat-head{background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px;}
+.chat-av{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;}
+.chat-av svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.chat-head-info .cname{font-size:.88rem;font-weight:700;}
+.chat-head-info .cstatus{font-size:.68rem;opacity:.65;}
+.chat-close-btn{margin-right:auto;background:none;border:none;color:#fff;cursor:pointer;padding:3px;display:flex;align-items:center;}
+.chat-close-btn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
+.chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:220px;max-height:290px;background:var(--blue-frost);}
+.cmsg{max-width:83%;padding:10px 13px;border-radius:13px;font-size:.82rem;line-height:1.7;}
+.cmsg.bot{background:var(--white);color:var(--text-dark);border-radius:13px 13px 13px 3px;align-self:flex-start;box-shadow:0 2px 6px rgba(11,44,106,.07);}
+.cmsg.user{background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));color:#fff;border-radius:13px 13px 3px 13px;align-self:flex-end;}
+.quick-btns{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;background:var(--white);border-top:1px solid var(--blue-pale);}
+.qb{background:var(--blue-frost);border:1px solid var(--blue-pale);border-radius:16px;padding:5px 11px;font-size:.73rem;font-weight:600;cursor:pointer;color:var(--blue-mid);font-family:'IBM Plex Sans Arabic',sans-serif;transition:background .15s;}
+.qb:hover{background:var(--blue-pale);}
+.chat-input-row{display:flex;gap:6px;padding:10px 13px;border-top:1px solid var(--blue-pale);background:var(--white);}
+.chat-input{flex:1;border:1px solid var(--blue-pale);border-radius:8px;padding:9px 12px;font-size:.82rem;font-family:'IBM Plex Sans Arabic',sans-serif;outline:none;direction:rtl;background:var(--blue-frost);transition:border-color .17s;-webkit-appearance:none;}
+.chat-input:focus{border-color:var(--blue-light);}
+.chat-send{background:var(--blue-mid);color:#fff;border:none;border-radius:8px;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .17s;flex-shrink:0;}
+.chat-send:hover{background:var(--blue-deep);}
+.chat-send svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ─── LOGIN MODAL ─── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(8,22,55,.48);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:var(--r-lg);padding:36px 32px;max-width:380px;width:100%;box-shadow:0 20px 56px rgba(11,44,106,.22);animation:popIn .26s ease;}
+.modal-icon-wrap{width:52px;height:52px;border-radius:13px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+.modal-icon-wrap svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.modal h3{font-size:1.15rem;font-weight:700;color:var(--blue-deep);margin-bottom:20px;text-align:center;}
+.modal .fgrp{margin-bottom:12px;}
+.modal-cancel{background:var(--blue-frost);border:1px solid var(--blue-pale);border-radius:8px;padding:9px;cursor:pointer;font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:600;color:var(--text-mid);font-size:.84rem;margin-top:8px;width:100%;transition:background .17s;}
+.modal-cancel:hover{background:var(--blue-pale);}
+
+/* ─── FOOTER ─── */
+footer{background:var(--blue-deep);color:rgba(255,255,255,.5);text-align:center;padding:20px 36px;font-size:.78rem;}
+footer span{color:#fff;font-weight:600;}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeInRight{from{opacity:0;transform:translateX(22px);}to{opacity:1;transform:none;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+@keyframes popIn{from{opacity:0;transform:scale(.93);}to{opacity:1;transform:none;}}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--blue-pale);border-radius:99px;}
+
+/* ═══════════════════════════════
+   MOBILE — full responsive
+═══════════════════════════════ */
+@media(max-width:900px){
+  /* nav */
+  nav{padding:0 18px;height:62px;}
+  .nav-logo img{height:46px;}
+  .nav-logo-txt .ar{font-size:.85rem;}
+  .nav-links{
+    display:none;flex-direction:column;align-items:stretch;gap:0;
+    position:absolute;top:62px;right:0;left:0;
+    background:var(--white);border-bottom:1px solid var(--blue-pale);
+    box-shadow:0 6px 20px rgba(11,44,106,.1);padding:10px 0;
+  }
+  .nav-links.open{display:flex;}
+  .nav-links li{width:100%;}
+  .nav-links a{padding:13px 22px;border-radius:0;font-size:.9rem;border-bottom:1px solid var(--blue-pale);}
+  .btn-login{margin:10px 16px;border-radius:9px;justify-content:center;padding:11px;}
+  .nav-toggle{display:flex;flex-direction:column;justify-content:center;}
+
+  /* hero — stacked */
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:40px 22px 32px;order:2;}
+  .hero-right{order:1;height:260px;min-height:260px;}
+  .hero-right img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:right center;
+  display:block;
+}
+  .hero-right::after{background:linear-gradient(to bottom,transparent 55%,var(--blue-frost) 100%);}
+  .hero-title{font-size:1.6rem;}
+  .hero-desc{font-size:.9rem;max-width:100%;}
+  .hero-actions{flex-direction:column;}
+  .hero-actions .btn{width:100%;justify-content:center;}
+
+  /* sections */
+  section{padding:48px 18px;}
+
+  /* features */
+  .features-grid{grid-template-columns:1fr 1fr;gap:12px;}
+
+  /* booking */
+  .booking-body{padding:22px 18px;}
+  .form-row{grid-template-columns:1fr;}
+
+  /* about */
+  .about-wrap{grid-template-columns:1fr;gap:28px;}
+  .about-img{order:-1;aspect-ratio:16/9;}
+
+  /* contact */
+  .contact-grid{grid-template-columns:1fr 1fr;}
+
+  /* chat */
+  .chat-win{width:calc(100vw - 40px);left:20px;bottom:90px;}
+  .chat-fab{bottom:20px;left:20px;}
+
+  /* modal */
+  .modal{padding:28px 22px;}
+}
+
+@media(max-width:480px){
+  .features-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .about-stats{grid-template-columns:1fr 1fr;}
+  .hero-right{height:210px;min-height:210px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ NAV ══════ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="smc.jpg" alt="شعار مجمع السلمانية الطبي" onerror="this.style.display='none'"/>
+    <div class="nav-logo-txt">
+      <div class="ar">مجمع السلمانية الطبي</div>
+      <div class="en">Salmaniya Medical Complex</div>
+    </div>
+  </a>
+
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="القائمة">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#features" onclick="closeNav()">
+      <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+      الرئيسية</a></li>
+    <li><a href="#booking" onclick="closeNav()">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      حجز المواعيد</a></li>
+    <li><a href="#results" onclick="closeNav()">
+      <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/><path d="M9 3a3 3 0 016 0v2H9V3z"/><path d="M9 12h6M9 16h4"/></svg>
+      نتائج الفحوصات</a></li>
+    <li><a href="#departments" onclick="closeNav()">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M12 2v4M8 13h8M12 9v8"/></svg>
+      الأقسام الطبية</a></li>
+    <li><a href="#about" onclick="closeNav()">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      من نحن</a></li>
+    <li><a href="#contact" onclick="closeNav()">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.8 19.8 0 01.04 2.36 2 2 0 012 .18h3a2 2 0 012 1.72 12.8 12.8 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.19-1.19a2 2 0 012.11-.45 12.8 12.8 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+      تواصل معنا</a></li>
+    <button class="btn-login" onclick="document.getElementById('login-modal').classList.add('open');closeNav()">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      تسجيل الدخول
+    </button>
+  </ul>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M12 2v4M8 13h8M12 9v8"/></svg>
+      مملكة البحرين — المنامة
+    </div>
+    <h1 class="hero-title">مجمع <span>السلمانية</span> الطبي</h1>
+    <p class="hero-en">Salmaniya Medical Complex</p>
+    <p class="hero-desc">
+      <strong>نقرب لك الخدمة … ونسهل عليك التواصل</strong><br/>
+      نوفر لكم خدمات سهلة لحجز المواعيد ومتابعة نتائج الفحوصات والتواصل معنا بكل سهولة
+    </p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        احجز موعدك الآن
+      </button>
+      <button class="btn btn-ghost" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" style="stroke:var(--blue-mid)"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/><path d="M9 3a3 3 0 016 0v2H9V3z"/><path d="M9 12h6M9 16h4"/></svg>
+        استعلم عن نتائجك
+      </button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="smc1.jpg" alt="مجمع السلمانية الطبي"
+         onerror="this.src='https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=900&q=80'"/>
+  </div>
+</div>
+
+<!-- ══════ 5 FEATURE CARDS ══════ -->
+<section id="features">
+  <div class="sec-header">
+    <div class="sec-label">خدماتنا الإلكترونية</div>
+    <h2 class="sec-title">كل ما تحتاجه في مكان واحد</h2>
+    <p class="sec-sub">خدمات صحية متكاملة بين يديك</p>
+  </div>
+  <div class="features-grid">
+
+    <div class="feat-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+      <div class="feat-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+      </div>
+      <div class="feat-name">حجز المواعيد</div>
+      <div class="feat-desc">احجز موعدك مع الطبيب بسهولة في أي وقت</div>
+    </div>
+
+    <div class="feat-btn" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">
+      <div class="feat-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/><path d="M9 3a3 3 0 016 0v2H9V3z"/><path d="M9 12h6M9 16h4"/></svg>
+      </div>
+      <div class="feat-name">نتائج الفحوصات</div>
+      <div class="feat-desc">اطلع على نتائجك وحملها بصيغة PDF</div>
+    </div>
+
+    <div class="feat-btn" onclick="document.getElementById('departments').scrollIntoView({behavior:'smooth'})">
+      <div class="feat-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      </div>
+      <div class="feat-name">الأقسام الطبية</div>
+      <div class="feat-desc">تعرف على جميع الأقسام والتخصصات</div>
+    </div>
+
+    <div class="feat-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <div class="feat-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.8 19.8 0 01.04 2.36 2 2 0 012 .18h3a2 2 0 012 1.72 12.8 12.8 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.19-1.19a2 2 0 012.11-.45 12.8 12.8 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+      </div>
+      <div class="feat-name">تواصل معنا</div>
+      <div class="feat-desc">أرقام التواصل والعناوين والبريد</div>
+    </div>
+
+    <div class="feat-btn" onclick="toggleChat()">
+      <div class="feat-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
+      </div>
+      <div class="feat-name">الرد على الاستفسارات</div>
+      <div class="feat-desc">تحدث مع مساعدنا للإجابة على أسئلتك</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════ BOOKING ══════ -->
+<section id="booking">
+  <div class="sec-header">
+    <div class="sec-label">حجز المواعيد</div>
+    <h2 class="sec-title">احجز موعدك بكل سهولة</h2>
+    <p class="sec-sub">اختر التخصص والوقت المناسب لك</p>
+  </div>
+  <div class="booking-card">
+    <div class="booking-head">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <div>
+        <h2>نموذج حجز الموعد</h2>
+        <p>يرجى تعبئة جميع الحقول لإتمام الحجز</p>
+      </div>
+    </div>
+    <div class="booking-body">
+      <div class="form-row">
+        <div class="fgrp"><label>الاسم الكامل</label><input type="text" placeholder="أدخل اسمك الكامل" id="b-name"/></div>
+        <div class="fgrp"><label>رقم الهوية / CPR</label><input type="text" placeholder="أدخل رقم الهوية"/></div>
+      </div>
+      <div class="form-row">
+        <div class="fgrp"><label>رقم الهاتف</label><input type="tel" placeholder="XXXXXXXX"/></div>
+        <div class="fgrp">
+          <label>التخصص الطبي</label>
+          <select id="b-dept">
+            <option value="">— اختر التخصص —</option>
+            <option>الحوادث والطوارئ</option><option>الجراحة</option>
+            <option>الأمراض الباطنية</option><option>طب العيون</option>
+            <option>أمراض النساء والولادة</option><option>طب الأطفال</option>
+            <option>الأنف والأذن والحنجرة</option><option>الأسنان</option>
+            <option>الأورام</option><option>التخدير</option><option>الأشعة</option>
+            <option>الطب الخاص</option><option>العلاج الطبيعي</option><option>بنك الدم</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgrp" style="margin-bottom:14px;">
+        <label>اختر التاريخ</label>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" onclick="changeMonth(-1)">&#8250; السابق</button>
+          <span class="cal-month" id="cal-month-lbl"></span>
+          <button class="cal-nav-btn" onclick="changeMonth(1)">التالي &#8249;</button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+      <div class="fgrp" style="margin-bottom:20px;">
+        <label>اختر الوقت المناسب</label>
+        <div class="slots-wrap" id="slots-wrap"></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="confirmBooking()">
+        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        تأكيد الحجز
+      </button>
+      <div class="confirm-msg" id="confirm-msg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ RESULTS ══════ -->
+<section id="results">
+  <div class="sec-header">
+    <div class="sec-label">نتائج الفحوصات</div>
+    <h2 class="sec-title">استعلام عن نتائجك</h2>
+    <p class="sec-sub">أدخل بياناتك للاطلاع على نتائجك وتحميلها</p>
+  </div>
+  <div class="results-center">
+    <div class="results-box">
+      <div class="results-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/><path d="M9 3a3 3 0 016 0v2H9V3z"/><path d="M9 12h6M9 16h4"/></svg>
+      </div>
+      <h3>الدخول إلى نتائج الفحوصات</h3>
+      <p>أدخل رقم هويتك وتاريخ ميلادك للاطلاع على نتائج فحوصاتك المخبرية وتحميلها بصيغة PDF</p>
+      <div class="results-form">
+        <input type="text" placeholder="رقم الهوية / CPR" id="r-id"/>
+        <input type="date" id="r-dob"/>
+        <button class="btn btn-primary" style="justify-content:center;" onclick="showResults()">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          عرض النتائج
+        </button>
+      </div>
+    </div>
+    <div class="result-card" id="result-card">
+      <div class="rc-head">
+        <div class="rc-title">نتائج التحليل الشامل</div>
+        <div class="rc-date">28 أبريل 2026</div>
+      </div>
+      <div class="rc-row"><span class="rc-lbl">تحليل الدم الكامل (CBC)</span><span class="rc-val ok">طبيعي ✓</span></div>
+      <div class="rc-row"><span class="rc-lbl">السكر في الدم (Glucose)</span><span class="rc-val ok">5.4 mmol/L ✓</span></div>
+      <div class="rc-row"><span class="rc-lbl">الكوليسترول الكلي</span><span class="rc-val hi">6.2 mmol/L ↑</span></div>
+      <div class="rc-row"><span class="rc-lbl">وظائف الكلى (Creatinine)</span><span class="rc-val ok">طبيعي ✓</span></div>
+      <div class="rc-row"><span class="rc-lbl">وظائف الكبد (ALT)</span><span class="rc-val ok">طبيعي ✓</span></div>
+      <div class="rc-row"><span class="rc-lbl">الغدة الدرقية (TSH)</span><span class="rc-val ok">2.1 mIU/L ✓</span></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;" onclick="alert('جاري تحميل ملف PDF للنتائج…')">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        تحميل النتائج بصيغة PDF
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ DEPARTMENTS ══════ -->
+<section id="departments">
+  <div class="sec-header">
+    <div class="sec-label">الأقسام الطبية</div>
+    <h2 class="sec-title">أقسامنا الطبية المتخصصة</h2>
+    <p class="sec-sub">يضم المجمع أقساماً طبية وجراحية متكاملة</p>
+  </div>
+  <div class="dept-grid">
+
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <div class="dname">الحوادث والطوارئ</div><div class="dinfo">999 / 17284080</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <div class="dname">الجراحة</div><div class="dinfo">17279704</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+      <div class="dname">الأمراض الباطنية</div><div class="dinfo">17279774</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v11"/><path d="M3 9h18M12 9v12m-3-3h6"/></svg></div>
+      <div class="dname">التخدير</div><div class="dinfo">17284288</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg></div>
+      <div class="dname">الأشعة</div><div class="dinfo">17284008</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg></div>
+      <div class="dname">طب العيون</div><div class="dinfo">17279770</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="dname">النساء والولادة</div><div class="dinfo">17284511</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="dname">طب الأطفال</div><div class="dinfo">17279717</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg></div>
+      <div class="dname">أنف وأذن وحنجرة</div><div class="dinfo">17279768</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"/><path d="M8 12s1 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+      <div class="dname">الأسنان</div><div class="dinfo">17279657</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/><path d="M9 3a3 3 0 016 0v2H9V3z"/><path d="M9 12h6M9 16h4"/></svg></div>
+      <div class="dname">الأورام</div><div class="dinfo">17284185</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <div class="dname">بنك الدم</div><div class="dinfo">17284450 / 17284454</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></div>
+      <div class="dname">العمليات</div><div class="dinfo">17284267 / 17259497</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div class="dname">الطب الخاص</div><div class="dinfo">17279792</div>
+    </div>
+    <div class="dept-card">
+      <div class="dept-card-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+      <div class="dname">العلاج الطبيعي</div><div class="dinfo">17284430</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════ ABOUT ══════ -->
+<section id="about">
+  <div class="sec-header">
+    <div class="sec-label">من نحن</div>
+    <h2 class="sec-title">مجمع السلمانية الطبي</h2>
+    <p class="sec-sub">صرح صحي بحريني عريق يخدم المملكة منذ 1959م</p>
+  </div>
+  <div class="about-wrap">
+    <div class="about-text">
+      <h2>من نحن</h2>
+      <p>يُعد مجمع السلمانية الطبي أكبر مجمع يخدم القطاع الصحي في مملكة البحرين، ويقدم خدماته إلى جميع المواطنين والمقيمين على حد سواء.</p>
+      <p>تبلغ الطاقة الاستيعابية للمجمع نحو 1200 سرير، بالإضافة إلى العيادات الخارجية بمختلف التخصصات الطبية والصحية، والتي تخدم شريحة كبيرة من المجتمع بما يفوق 870,000 موعد سنوياً حسب الدراسات الإحصائية لسنة 2017.</p>
+      <p>يضم المجمع العديد من الأقسام التخصصية التي تشمل الرعاية الصحية الثانوية، بالإضافة إلى قسم الحوادث والطوارئ الذي يقدم الرعاية الطبية العاجلة لكل المرضى والجرحى، وقسم الأشعة، والعيادات الخارجية.</p>
+      <p>يسعى المجمع لتلبية جميع احتياجات المواطنين للرعاية الصحية الثانوية، وفق أرقى الأساليب وأكثرها كفاءة، كما يشكّل مركزاً تعليمياً وبحثياً للمختصين في مجال الصحة. افتتح المجمع على عدة مراحل منذ عام 1959م، وتم افتتاحه كمجمع طبي متكامل في عام 1978م.</p>
+      <div class="about-stats">
+        <div class="stat-box"><div class="stat-num">1200</div><div class="stat-lbl">سرير طبي</div></div>
+        <div class="stat-box"><div class="stat-num">870K+</div><div class="stat-lbl">موعد سنوياً</div></div>
+        <div class="stat-box"><div class="stat-num">1959</div><div class="stat-lbl">سنة التأسيس</div></div>
+        <div class="stat-box"><div class="stat-num">15+</div><div class="stat-lbl">قسماً متخصصاً</div></div>
+      </div>
+    </div>
+    <div class="about-img">
+      <img src="smc1.jpg" alt="مجمع السلمانية الطبي" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80'"/>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CONTACT ══════ -->
+<section id="contact">
+  <div class="sec-header">
+    <div class="sec-label">تواصل معنا</div>
+    <h2 class="sec-title">تواصل معنا</h2>
+    <p class="sec-sub">نحن هنا لمساعدتك على مدار الساعة</p>
+  </div>
+  <div class="con-main-number">
+    <p>الخط الرئيسي للتواصل</p>
+    <span>17288888</span>
+  </div>
+  <div class="contact-grid">
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="con-lbl">الحوادث والطوارئ</div><div class="con-val">999 / 17284080</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="con-lbl">الجراحة</div><div class="con-val">17279704</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div><div class="con-lbl">الأمراض الباطنية</div><div class="con-val">17279774</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v11M3 9h18M12 9v12m-3-3h6"/></svg></div><div class="con-lbl">التخدير</div><div class="con-val">17284288</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg></div><div class="con-lbl">الأشعة</div><div class="con-val">17284008</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg></div><div class="con-lbl">طب العيون</div><div class="con-val">17279770</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="con-lbl">النساء والولادة</div><div class="con-val">17284511</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="con-lbl">طب الأطفال</div><div class="con-val">17279717</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0118 0v6"/></svg></div><div class="con-lbl">أنف وأذن وحنجرة</div><div class="con-val">17279768</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"/></svg></div><div class="con-lbl">الأسنان</div><div class="con-val">17279657</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/></svg></div><div class="con-lbl">الأورام</div><div class="con-val">17284185</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="con-lbl">بنك الدم</div><div class="con-val">17284450 / 17284454</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div><div class="con-lbl">العمليات</div><div class="con-val">17284267 / 17259497</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="con-lbl">الطب الخاص</div><div class="con-val">17279792</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><div class="con-lbl">العلاج الطبيعي</div><div class="con-val">17284430</div></div>
+    <div class="con-card"><div class="con-card-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="con-lbl">العنوان</div><div class="con-val">المنامة، مملكة البحرين</div></div>
+  </div>
+</section>
+
+<!-- ══════ CHATBOT ══════ -->
+<button class="chat-fab" onclick="toggleChat()">
+  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  <span class="chat-badge" id="chat-badge">1</span>
+</button>
+
+<div class="chat-win" id="chat-win">
+  <div class="chat-head">
+    <div class="chat-av">
+      <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7H3a7 7 0 017-7h1V5.73A2 2 0 0110 4a2 2 0 012-2zM3 14v1a9 9 0 0018 0v-1"/><path d="M8 14h.01M16 14h.01"/></svg>
+    </div>
+    <div class="chat-head-info">
+      <div class="cname">مساعد السلمانية</div>
+      <div class="cstatus">● متصل الآن</div>
+    </div>
+    <button class="chat-close-btn" onclick="toggleChat()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs">
+    <div class="cmsg bot">مرحباً بك في مجمع السلمانية الطبي<br/>كيف يمكنني مساعدتك اليوم؟</div>
+  </div>
+  <div class="quick-btns">
+    <button class="qb" onclick="quickMsg('كيف أحجز موعداً؟')">حجز موعد</button>
+    <button class="qb" onclick="quickMsg('أين يقع المجمع؟')">الموقع</button>
+    <button class="qb" onclick="quickMsg('ما هي ساعات العمل؟')">ساعات العمل</button>
+    <button class="qb" onclick="quickMsg('كيف أطلع على نتائجي؟')">النتائج</button>
+    <button class="qb" onclick="quickMsg('ما هي الأقسام المتاحة؟')">الأقسام</button>
+    <button class="qb" onclick="quickMsg('رقم الطوارئ؟')">الطوارئ</button>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" placeholder="اكتب سؤالك هنا…" onkeydown="if(event.key==='Enter')sendMsg()"/>
+    <button class="chat-send" onclick="sendMsg()">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══════ LOGIN MODAL ══════ -->
+<div class="modal-overlay" id="login-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-icon-wrap">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <h3>تسجيل الدخول</h3>
+    <div class="fgrp">
+      <label>رقم الهوية / CPR</label>
+      <input type="text" placeholder="أدخل رقم هويتك"/>
+    </div>
+    <div class="fgrp">
+      <label>كلمة المرور</label>
+      <input type="password" placeholder="أدخل كلمة المرور"/>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;"
+      onclick="document.getElementById('login-modal').classList.remove('open');alert('تم تسجيل الدخول بنجاح ✓')">
+      <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      دخول
+    </button>
+    <button class="modal-cancel" onclick="document.getElementById('login-modal').classList.remove('open')">إلغاء</button>
+  </div>
+</div>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <p>© 2026 <span>مجمع السلمانية الطبي</span> — مملكة البحرين &nbsp;|&nbsp; جميع الحقوق محفوظة &nbsp;|&nbsp; وزارة الصحة</p>
+</footer>
+
+<script>
+function closeNav(){
+  if(window.innerWidth<=900)
+    document.querySelector('.nav-links').classList.remove('open');
+}
+
+/* ─ CALENDAR ─ */
+const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const DAYS=['أح','إث','ث','أر','خ','ج','س'];
+let calDate=new Date();calDate.setDate(1);
+let selDay=null,selSlot=null;
+
+function renderCal(){
+  const y=calDate.getFullYear(),m=calDate.getMonth();
+  document.getElementById('cal-month-lbl').textContent=MONTHS[m]+' '+y;
+  const grid=document.getElementById('cal-grid');grid.innerHTML='';
+  DAYS.forEach(d=>{const h=document.createElement('div');h.className='cal-dh';h.textContent=d;grid.appendChild(h);});
+  const first=new Date(y,m,1).getDay();
+  const total=new Date(y,m+1,0).getDate();
+  const today=new Date();
+  for(let i=0;i<first;i++){const e=document.createElement('div');e.className='cal-d empty';grid.appendChild(e);}
+  for(let d=1;d<=total;d++){
+    const cell=document.createElement('div');cell.className='cal-d';cell.textContent=d;
+    const td=new Date(y,m,d);
+    if(td<new Date(today.getFullYear(),today.getMonth(),today.getDate()))cell.classList.add('past');
+    if(today.getDate()===d&&today.getMonth()===m&&today.getFullYear()===y)cell.classList.add('today');
+    if(selDay===d)cell.classList.add('selected');
+    cell.onclick=()=>{selDay=d;renderCal();};
+    grid.appendChild(cell);
+  }
+}
+function changeMonth(d){calDate.setMonth(calDate.getMonth()+d);selDay=null;renderCal();}
+
+const ALL_S=['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','13:00','13:30','14:00','14:30','15:00','15:30','16:00'];
+const OFF_S=['09:30','11:00','14:00'];
+function renderSlots(){
+  const w=document.getElementById('slots-wrap');w.innerHTML='';
+  ALL_S.forEach(s=>{
+    const b=document.createElement('button');b.className='slot';b.textContent=s;
+    if(OFF_S.includes(s))b.classList.add('off');
+    if(selSlot===s)b.classList.add('selected');
+    b.onclick=()=>{selSlot=s;renderSlots();};
+    w.appendChild(b);
+  });
+}
+renderCal();renderSlots();
+
+function confirmBooking(){
+  const name=document.getElementById('b-name').value.trim();
+  const dept=document.getElementById('b-dept').value;
+  const msg=document.getElementById('confirm-msg');
+  if(!name||!dept||!selDay||!selSlot){alert('يرجى تعبئة جميع الحقول واختيار التاريخ والوقت');return;}
+  msg.textContent=`تم تأكيد حجز موعدك بنجاح — ${name} — ${dept} — ${MONTHS[calDate.getMonth()]} ${selDay} — الساعة ${selSlot}`;
+  msg.classList.add('show');
+  setTimeout(()=>msg.classList.remove('show'),7000);
+}
+
+/* ─ RESULTS ─ */
+function showResults(){
+  const id=document.getElementById('r-id').value.trim();
+  const dob=document.getElementById('r-dob').value;
+  if(!id||!dob){alert('يرجى إدخال رقم الهوية وتاريخ الميلاد');return;}
+  const c=document.getElementById('result-card');
+  c.classList.add('show');
+  c.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ─ CHATBOT ─ */
+function toggleChat(){
+  document.getElementById('chat-win').classList.toggle('open');
+  document.getElementById('chat-badge').style.display='none';
+}
+const BOT={
+  'كيف أحجز موعداً؟':'يمكنك حجز موعدك من قسم "حجز المواعيد" أعلاه، أو الاتصال على 17288888',
+  'أين يقع المجمع؟':'يقع مجمع السلمانية الطبي في المنامة، مملكة البحرين',
+  'ما هي ساعات العمل؟':'الطوارئ 24 ساعة / 7 أيام. العيادات من 7 صباحاً حتى 9 مساءً',
+  'كيف أطلع على نتائجي؟':'اذهب إلى قسم "نتائج الفحوصات" وأدخل رقم هويتك وتاريخ ميلادك',
+  'ما هي الأقسام المتاحة؟':'يضم المجمع 15 قسماً طبياً متخصصاً. تصفح قسم "الأقسام الطبية" للمزيد',
+  'رقم الطوارئ؟':'في الطوارئ اتصل على 999 أو 17284080',
+};
+function addMsg(text,who){
+  const d=document.createElement('div');d.className='cmsg '+who;d.textContent=text;
+  const m=document.getElementById('chat-msgs');m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+function sendMsg(){
+  const inp=document.getElementById('chat-input');
+  const t=inp.value.trim();if(!t)return;
+  addMsg(t,'user');inp.value='';
+  setTimeout(()=>addMsg(getReply(t),'bot'),500);
+}
+function quickMsg(t){addMsg(t,'user');setTimeout(()=>addMsg(getReply(t),'bot'),450);}
+function getReply(text){
+  if(BOT[text])return BOT[text];
+  const t=text.toLowerCase();
+  if(t.includes('حج')||t.includes('موعد'))return 'لحجز موعد، توجه لقسم "حجز المواعيد" أو اتصل على 17288888';
+  if(t.includes('نتيج')||t.includes('تحليل')||t.includes('فحص'))return 'لمتابعة نتائجك، اذهب لقسم "نتائج الفحوصات" وأدخل رقم هويتك';
+  if(t.includes('طوار'))return 'طوارئ المجمع متاحة 24 ساعة. اتصل على 999 أو 17284080';
+  if(t.includes('قسم')||t.includes('تخصص'))return 'يضم مجمعنا 15 قسماً طبياً. تصفح قسم "الأقسام الطبية"';
+  if(t.includes('موقع')||t.includes('عنوان'))return 'نقع في المنامة، مملكة البحرين';
+  if(t.includes('ساعة')||t.includes('وقت'))return 'الطوارئ 24/7 — العيادات من 7 صباحاً حتى 9 مساءً';
+  if(t.includes('شكر'))return 'العفو! نحن دائماً في خدمتك. صحتك أولويتنا.';
+  return 'شكراً لتواصلك مع مجمع السلمانية الطبي. للمساعدة اتصل على 17288888';
+}
+</script>
+</body>
+</html>
