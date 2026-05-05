@@ -32,30 +32,16 @@ nav{
 .nav-logo-txt .ar{font-size:.95rem;font-weight:700;color:var(--blue-deep);line-height:1.3;}
 .nav-logo-txt .en{font-size:.62rem;color:var(--text-soft);letter-spacing:.5px;}
 
-.nav-links{display:flex;align-items:center;gap:2px;list-style:none;}
-.nav-links a{
-  display:flex;align-items:center;gap:5px;
-  text-decoration:none;font-size:.82rem;font-weight:600;
-  color:var(--text-mid);padding:7px 11px;border-radius:8px;
-  transition:background .17s,color .17s;white-space:nowrap;
-}
-.nav-links a:hover{background:var(--blue-pale);color:var(--blue-mid);}
-.nav-links a svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
-
 .btn-login{
   display:flex;align-items:center;gap:6px;
   background:var(--blue-mid);color:#fff;border:none;
   border-radius:9px;padding:8px 18px;
   font-size:.82rem;font-weight:600;
   font-family:'IBM Plex Sans Arabic',sans-serif;
-  cursor:pointer;transition:background .18s;white-space:nowrap;margin-right:6px;
+  cursor:pointer;transition:background .18s;white-space:nowrap;
 }
 .btn-login:hover{background:var(--blue-deep);}
 .btn-login svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-
-/* hamburger */
-.nav-toggle{display:none;background:none;border:1px solid var(--blue-pale);border-radius:8px;padding:6px 8px;cursor:pointer;}
-.nav-toggle span{display:block;width:20px;height:2px;background:var(--blue-mid);margin:4px 0;border-radius:2px;transition:all .2s;}
 
 /* ─── HERO ─── */
 .hero{
@@ -97,7 +83,7 @@ nav{
   position: relative;
   overflow: hidden;
   min-height: 400px;
-  display: flex; /* Added to help alignment */
+  display: flex;
   align-items: center;
 }
 
@@ -106,8 +92,8 @@ nav{
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Keeps aspect ratio while filling space */
-  object-position: right center; /* Focuses on the right side where the building usually is */
+  object-fit: cover;
+  object-position: right center;
   display: block;
 }
 .hero-right::after{
@@ -232,14 +218,14 @@ section{padding:64px 36px;}
   border-radius: var(--r-lg);
   overflow: hidden;
   box-shadow: 0 14px 44px rgba(11,44,106,.13);
-  /* Change aspect-ratio or remove it to let the image breathe */
-  height: auto; 
+  height: auto;
   display: flex;
-}.about-img img {
+}
+.about-img img {
   width: 100%;
-  height: auto; /* Changed from 100% to auto */
+  height: auto;
   max-height: 500px;
-  object-fit: cover; /* Change to 'contain' if you don't want any cropping at all */
+  object-fit: cover;
 }
 
 /* ─── CONTACT ─── */
@@ -313,63 +299,33 @@ footer span{color:#fff;font-weight:600;}
    MOBILE — full responsive
 ═══════════════════════════════ */
 @media(max-width:900px){
-  /* nav */
   nav{padding:0 18px;height:62px;}
   .nav-logo img{height:46px;}
   .nav-logo-txt .ar{font-size:.85rem;}
-  .nav-links{
-    display:none;flex-direction:column;align-items:stretch;gap:0;
-    position:absolute;top:62px;right:0;left:0;
-    background:var(--white);border-bottom:1px solid var(--blue-pale);
-    box-shadow:0 6px 20px rgba(11,44,106,.1);padding:10px 0;
-  }
-  .nav-links.open{display:flex;}
-  .nav-links li{width:100%;}
-  .nav-links a{padding:13px 22px;border-radius:0;font-size:.9rem;border-bottom:1px solid var(--blue-pale);}
-  .btn-login{margin:10px 16px;border-radius:9px;justify-content:center;padding:11px;}
-  .nav-toggle{display:flex;flex-direction:column;justify-content:center;}
 
   /* hero — stacked */
   .hero{grid-template-columns:1fr;min-height:auto;}
   .hero-left{padding:40px 22px 32px;order:2;}
   .hero-right{order:1;height:260px;min-height:260px;}
   .hero-right img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:right center;
-  display:block;
-}
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:right center;display:block;
+  }
   .hero-right::after{background:linear-gradient(to bottom,transparent 55%,var(--blue-frost) 100%);}
   .hero-title{font-size:1.6rem;}
   .hero-desc{font-size:.9rem;max-width:100%;}
   .hero-actions{flex-direction:column;}
   .hero-actions .btn{width:100%;justify-content:center;}
 
-  /* sections */
   section{padding:48px 18px;}
-
-  /* features */
   .features-grid{grid-template-columns:1fr 1fr;gap:12px;}
-
-  /* booking */
   .booking-body{padding:22px 18px;}
   .form-row{grid-template-columns:1fr;}
-
-  /* about */
   .about-wrap{grid-template-columns:1fr;gap:28px;}
   .about-img{order:-1;aspect-ratio:16/9;}
-
-  /* contact */
   .contact-grid{grid-template-columns:1fr 1fr;}
-
-  /* chat */
   .chat-win{width:calc(100vw - 40px);left:20px;bottom:90px;}
   .chat-fab{bottom:20px;left:20px;}
-
-  /* modal */
   .modal{padding:28px 22px;}
 }
 
@@ -393,34 +349,10 @@ footer span{color:#fff;font-weight:600;}
     </div>
   </a>
 
-  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="القائمة">
-    <span></span><span></span><span></span>
+  <button class="btn-login" onclick="document.getElementById('login-modal').classList.add('open')">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    تسجيل الدخول
   </button>
-
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#features" onclick="closeNav()">
-      <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-      الرئيسية</a></li>
-    <li><a href="#booking" onclick="closeNav()">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      حجز المواعيد</a></li>
-    <li><a href="#results" onclick="closeNav()">
-      <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/><path d="M9 3a3 3 0 016 0v2H9V3z"/><path d="M9 12h6M9 16h4"/></svg>
-      نتائج الفحوصات</a></li>
-    <li><a href="#departments" onclick="closeNav()">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M12 2v4M8 13h8M12 9v8"/></svg>
-      الأقسام الطبية</a></li>
-    <li><a href="#about" onclick="closeNav()">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-      من نحن</a></li>
-    <li><a href="#contact" onclick="closeNav()">
-      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.8 19.8 0 01.04 2.36 2 2 0 012 .18h3a2 2 0 012 1.72 12.8 12.8 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.19-1.19a2 2 0 012.11-.45 12.8 12.8 0 002.81.7A2 2 0 0122 14.92z"/></svg>
-      تواصل معنا</a></li>
-    <button class="btn-login" onclick="document.getElementById('login-modal').classList.add('open');closeNav()">
-      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      تسجيل الدخول
-    </button>
-  </ul>
 </nav>
 
 <!-- ══════ HERO ══════ -->
@@ -699,7 +631,8 @@ footer span{color:#fff;font-weight:600;}
       </div>
     </div>
     <div class="about-img">
-        <img src="/SalmaniyaMedicalComplex/smc1.jpg" alt="مجمع السلمانية الطبي"/>    </div>
+      <img src="/SalmaniyaMedicalComplex/smc1.jpg" alt="مجمع السلمانية الطبي"/>
+    </div>
   </div>
 </section>
 
@@ -802,11 +735,6 @@ footer span{color:#fff;font-weight:600;}
 </footer>
 
 <script>
-function closeNav(){
-  if(window.innerWidth<=900)
-    document.querySelector('.nav-links').classList.remove('open');
-}
-
 /* ─ CALENDAR ─ */
 const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 const DAYS=['أح','إث','ث','أر','خ','ج','س'];
