@@ -263,14 +263,18 @@ section{padding:64px 36px;}
 .cmsg{max-width:83%;padding:10px 13px;border-radius:13px;font-size:.82rem;line-height:1.7;}
 .cmsg.bot{background:var(--white);color:var(--text-dark);border-radius:13px 13px 13px 3px;align-self:flex-start;box-shadow:0 2px 6px rgba(11,44,106,.07);}
 .cmsg.user{background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));color:#fff;border-radius:13px 13px 3px 13px;align-self:flex-end;}
+.cmsg.typing{background:var(--white);color:var(--text-soft);border-radius:13px 13px 13px 3px;align-self:flex-start;box-shadow:0 2px 6px rgba(11,44,106,.07);font-style:italic;}
 .quick-btns{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;background:var(--white);border-top:1px solid var(--blue-pale);}
 .qb{background:var(--blue-frost);border:1px solid var(--blue-pale);border-radius:16px;padding:5px 11px;font-size:.73rem;font-weight:600;cursor:pointer;color:var(--blue-mid);font-family:'IBM Plex Sans Arabic',sans-serif;transition:background .15s;}
 .qb:hover{background:var(--blue-pale);}
+.qb:disabled{opacity:.5;pointer-events:none;}
 .chat-input-row{display:flex;gap:6px;padding:10px 13px;border-top:1px solid var(--blue-pale);background:var(--white);}
 .chat-input{flex:1;border:1px solid var(--blue-pale);border-radius:8px;padding:9px 12px;font-size:.82rem;font-family:'IBM Plex Sans Arabic',sans-serif;outline:none;direction:rtl;background:var(--blue-frost);transition:border-color .17s;-webkit-appearance:none;}
 .chat-input:focus{border-color:var(--blue-light);}
+.chat-input:disabled{opacity:.6;}
 .chat-send{background:var(--blue-mid);color:#fff;border:none;border-radius:8px;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .17s;flex-shrink:0;}
 .chat-send:hover{background:var(--blue-deep);}
+.chat-send:disabled{opacity:.6;pointer-events:none;}
 .chat-send svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
 /* ─── LOGIN MODAL ─── */
@@ -680,7 +684,7 @@ footer span{color:#fff;font-weight:600;}
     </div>
     <div class="chat-head-info">
       <div class="cname">مساعد السلمانية</div>
-      <div class="cstatus">● متصل الآن</div>
+      <div class="cstatus">● متصل الآن — مدعوم بالذكاء الاصطناعي</div>
     </div>
     <button class="chat-close-btn" onclick="toggleChat()">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -699,7 +703,7 @@ footer span{color:#fff;font-weight:600;}
   </div>
   <div class="chat-input-row">
     <input class="chat-input" id="chat-input" placeholder="اكتب سؤالك هنا…" onkeydown="if(event.key==='Enter')sendMsg()"/>
-    <button class="chat-send" onclick="sendMsg()">
+    <button class="chat-send" id="chat-send-btn" onclick="sendMsg()">
       <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
   </div>
@@ -796,41 +800,89 @@ function showResults(){
   c.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-/* ─ CHATBOT ─ */
+/* ─ CHATBOT (Claude API powered) ─ */
 function toggleChat(){
   document.getElementById('chat-win').classList.toggle('open');
   document.getElementById('chat-badge').style.display='none';
 }
-const BOT={
-  'كيف أحجز موعداً؟':'يمكنك حجز موعدك من قسم "حجز المواعيد" أعلاه، أو الاتصال على 17288888',
-  'أين يقع المجمع؟':'يقع مجمع السلمانية الطبي في المنامة، مملكة البحرين',
-  'ما هي ساعات العمل؟':'الطوارئ 24 ساعة / 7 أيام. العيادات من 7 صباحاً حتى 9 مساءً',
-  'كيف أطلع على نتائجي؟':'اذهب إلى قسم "نتائج الفحوصات" وأدخل رقم هويتك وتاريخ ميلادك',
-  'ما هي الأقسام المتاحة؟':'يضم المجمع 15 قسماً طبياً متخصصاً. تصفح قسم "الأقسام الطبية" للمزيد',
-  'رقم الطوارئ؟':'في الطوارئ اتصل على 999 أو 17284080',
-};
-function addMsg(text,who){
-  const d=document.createElement('div');d.className='cmsg '+who;d.textContent=text;
-  const m=document.getElementById('chat-msgs');m.appendChild(d);m.scrollTop=m.scrollHeight;
+
+// Running conversation history sent to the model on every turn
+const chatHistory=[];
+
+const SYSTEM_PROMPT=`أنت "مساعد السلمانية"، مساعد افتراضي ودود ومحترف لمجمع السلمانية الطبي في مملكة البحرين.
+معلومات أساسية عن المجمع:
+- الخط الرئيسي: 17288888
+- الطوارئ: 999 أو 17284080 (متاح 24 ساعة / 7 أيام)
+- العيادات الخارجية: من 7 صباحاً حتى 9 مساءً
+- الموقع: المنامة، مملكة البحرين
+- المجمع يضم 15 قسماً طبياً متخصصاً (الطوارئ، الجراحة، الباطنية، العيون، النساء والولادة، الأطفال، الأنف والأذن والحنجرة، الأسنان، الأورام، التخدير، الأشعة، الطب الخاص، العلاج الطبيعي، بنك الدم، العمليات)
+- حجز المواعيد ومتابعة نتائج الفحوصات متاحة عبر الموقع مباشرة
+
+أجب دائماً باللغة العربية، بإيجاز ووضوح (2-4 جمل كحد أقصى)، وبأسلوب ودود ومهني. لا تقدم أي تشخيص طبي أو نصائح طبية أو معلومات عن أدوية. إذا سُئلت عن أمر طبي أو حالة صحية، وجّه المستخدم للتواصل مع طبيب أو الاتصال على الخط الرئيسي 17288888، أو الطوارئ 999 في الحالات العاجلة.`;
+
+function addMsg(text,who,id){
+  const d=document.createElement('div');
+  d.className='cmsg '+who;
+  if(id)d.id=id;
+  d.textContent=text;
+  const m=document.getElementById('chat-msgs');
+  m.appendChild(d);
+  m.scrollTop=m.scrollHeight;
+  return d;
 }
+
+function setChatBusy(busy){
+  document.getElementById('chat-input').disabled=busy;
+  document.getElementById('chat-send-btn').disabled=busy;
+  document.querySelectorAll('.qb').forEach(b=>b.disabled=busy);
+}
+
+async function getAIReply(userText){
+  chatHistory.push({role:'user',content:userText});
+  try{
+    const response=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:300,
+        system:SYSTEM_PROMPT,
+        messages:chatHistory
+      })
+    });
+    if(!response.ok)throw new Error('API request failed: '+response.status);
+    const data=await response.json();
+    const textBlock=data.content.find(b=>b.type==='text');
+    const reply=textBlock?textBlock.text:'عذراً، لم أتمكن من معالجة طلبك. يرجى الاتصال على 17288888.';
+    chatHistory.push({role:'assistant',content:reply});
+    return reply;
+  }catch(err){
+    console.error('Chat API error:',err);
+    return 'عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى أو الاتصال على 17288888.';
+  }
+}
+
+async function handleUserMessage(text){
+  addMsg(text,'user');
+  setChatBusy(true);
+  const typingEl=addMsg('يكتب…','typing','typing-indicator');
+  const reply=await getAIReply(text);
+  const indicator=document.getElementById('typing-indicator');
+  if(indicator)indicator.remove();
+  addMsg(reply,'bot');
+  setChatBusy(false);
+}
+
 function sendMsg(){
   const inp=document.getElementById('chat-input');
-  const t=inp.value.trim();if(!t)return;
-  addMsg(t,'user');inp.value='';
-  setTimeout(()=>addMsg(getReply(t),'bot'),500);
+  const t=inp.value.trim();
+  if(!t)return;
+  inp.value='';
+  handleUserMessage(t);
 }
-function quickMsg(t){addMsg(t,'user');setTimeout(()=>addMsg(getReply(t),'bot'),450);}
-function getReply(text){
-  if(BOT[text])return BOT[text];
-  const t=text.toLowerCase();
-  if(t.includes('حج')||t.includes('موعد'))return 'لحجز موعد، توجه لقسم "حجز المواعيد" أو اتصل على 17288888';
-  if(t.includes('نتيج')||t.includes('تحليل')||t.includes('فحص'))return 'لمتابعة نتائجك، اذهب لقسم "نتائج الفحوصات" وأدخل رقم هويتك';
-  if(t.includes('طوار'))return 'طوارئ المجمع متاحة 24 ساعة. اتصل على 999 أو 17284080';
-  if(t.includes('قسم')||t.includes('تخصص'))return 'يضم مجمعنا 15 قسماً طبياً. تصفح قسم "الأقسام الطبية"';
-  if(t.includes('موقع')||t.includes('عنوان'))return 'نقع في المنامة، مملكة البحرين';
-  if(t.includes('ساعة')||t.includes('وقت'))return 'الطوارئ 24/7 — العيادات من 7 صباحاً حتى 9 مساءً';
-  if(t.includes('شكر'))return 'العفو! نحن دائماً في خدمتك. صحتك أولويتنا.';
-  return 'شكراً لتواصلك مع مجمع السلمانية الطبي. للمساعدة اتصل على 17288888';
+
+function quickMsg(t){
+  handleUserMessage(t);
 }
 </script>
 </body>
