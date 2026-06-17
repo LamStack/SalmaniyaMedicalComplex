@@ -837,15 +837,17 @@ function setChatBusy(busy){
   document.querySelectorAll('.qb').forEach(b=>b.disabled=busy);
 }
 
+// Replace with your deployed Cloudflare Worker URL, e.g.
+// 'https://smc-chat-proxy.yourname.workers.dev'
+const PROXY_URL='https://broken-snow-727b.lameesadel2017.workers.dev';
+
 async function getAIReply(userText){
   chatHistory.push({role:'user',content:userText});
   try{
-    const response=await fetch('https://api.anthropic.com/v1/messages',{
+    const response=await fetch(PROXY_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        model:'claude-sonnet-4-6',
-        max_tokens:300,
         system:SYSTEM_PROMPT,
         messages:chatHistory
       })
